@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log-In Tim Dragon Squad</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, lightgreen 0%, orange 100%);
+        }
+
+        form {
+            max-width: 400px;
+            margin: 10px auto;
+            padding: 20px;
+            color: grey;
+            border: 1px solid red;
+            border-radius: 10px;
+            background: linear-gradient(45deg, orange 0%, lightgreen 100%);
+        }
+
+        label {
+            text-align: center;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="button"] {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: darkblue;
+        }
+
+        h3 {
+            text-align: center;
+            color: grey;
+        }
+
+        #result {
+            display: none;
+            width: 200px;
+            color: grey;
+            font-size: 25px;
+            position: absolute;
+            text-align: center;
+            margin-bottom: 20px;
+            border:2px solid grey;
+        }
+
+        #copy{
+            display: none;
+            width: 100px;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 30px;
+            color: grey;
+            position: absolute;
+            border: 2px solid grey;
+            background-color: transparent;
+        }
+        
+        #gabung {
+            display: none;
+            width: 100px;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: grey;
+            position: absolute;
+            border: 2px solid grey;
+            background-color: transparent;
+            animation: gab 1s linear infinite;
+        }
+        
+        @keyframes gab{
+            0%{
+                background-color: transparent;
+            }
+            50%{
+                background-color: orange;
+            }
+            100%{
+                background-color: transparent;
+            }
+        }
+        
+        #copy{
+            top: 380px;
+        }
+        
+        #gabung{
+            top:420px;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+        }
+        
+        #judl {
+            display: none;
+            position: absolute;
+            font-size: 20px;
+            top: 130px;
+        }
+        
+        input[type="text"], input[type="number"], select{
+            background: linear-gradient(45deg, lightgreen 0%, orange 100%);
+        }
+        
+        #daftarButton:hover{
+            text-decoration: underline;
+            text-decoration-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="judl">🐉INTRO CARD DRAGON SQUAD🐉</h3>
+    <form id="myForm">
+        <h3>Dragon Squad Team Log-In</h3>
+        <label for="nama">Nama</label>
+        <input type="text" name="nama" placeholder="(nama mu)" id="nama" required oninput="toggleButton()" />
+
+        <label for="umur">Umur</label>
+        <input type="number" name="umur" placeholder="(umur mu)" id="umur" required oninput="toggleButton()" />
+
+        <label for="alamat">Alamat</label>
+        <input type="text" name="alamat" placeholder="(kota mu)" id="alamat" required oninput="toggleButton()" />
+
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender" required oninput="toggleButton()">
+            <option value="" >Pilih Gender</option>
+            <option value="Bro">Bro</option>
+            <option value="Sis">Sis</option>
+        </select>
+
+        <input type="button" id="daftarButton" value="Daftar" onclick="submitForm()" disabled />
+    </form>
+    
+    <div id="result"></div>
+    <button id="copy" onclick="copyText()">Salin</button>
+    
+    <button id="gabung" type="submit" onclick="window.location.href='https://chat.whatsapp.com/EpJW8mfl7Y47toRSLKJQ9T'">Masuk</button>
+
+    <script>
+        function toggleButton() {
+            const nama = document.getElementById("nama").value;
+            const umur = document.getElementById("umur").value;
+            const alamat = document.getElementById("alamat").value;
+            const gender = document.getElementById("gender").value;
+            const button = document.getElementById("daftarButton");
+
+            // Mengaktifkan tombol jika semua input terisi
+            button.disabled = !(nama && umur && alamat && gender);
+        }
+    
+        function submitForm() {
+            const nama = document.getElementById("nama").value;
+            const umur = document.getElementById("umur").value;
+            const alamat = document.getElementById("alamat").value;
+            const gender = document.getElementById("gender").value;
+
+            const result = document.getElementById("result");
+            result.textContent = `Nama: ${nama}\nUmur: ${umur}\nAlamat: ${alamat}\nGender: ${gender}`;
+
+            document.getElementById("myForm").style.display = "none";
+            result.style.display = "block";
+            document.getElementById("judl").style.display = "block";
+            document.getElementById("copy").style.display = "block";
+        }
+
+        function copyText() {
+            const result = document.getElementById("result");
+            const textToCopy = result.textContent;
+
+            const tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            alert("Silahkan login lalu tempelkan di group ");
+            
+            document.getElementById("gabung").style.display ="block";
+        }
+    </script>
+</body>
+</html>
